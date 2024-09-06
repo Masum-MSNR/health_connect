@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.MainActivity">
+
+    <ImageView
+        android:id="@+id/health_connect_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/ic_health_connect_logo" />
+
+    <TextView
+        android:id="@+id/primary_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/health_connect_logo"
+        android:layout_marginTop="20dp"
+        android:justificationMode="inter_word"
+        android:padding="20dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="Primary description" />
+
+    <TextView
+        android:id="@+id/secondary_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/primary_text"
+        android:justificationMode="inter_word"
+        android:paddingHorizontal="20dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="14sp"
+        tools:text="Secondary description" />
+
+
+
+
+
+</RelativeLayout>

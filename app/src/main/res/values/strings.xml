@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">health_connect</string>
+
+    <string name="installed_welcome_message">
+        Health Connect is installed on this device. Use the menu to explore the sample, with each
+        screen demonstrating a different aspect of Health Connect functionality.
+    </string>
+
+    <string name="market_url">market://details</string>
+    <string name="health_connect_package">com.google.android.apps.healthdata</string>
+    <string name="onboarding_url">healthconnect://onboarding</string>
+    <string name="not_installed_description">
+        Health Connect is supported on this device, but is either not installed, or requires an update.
+    </string>
+    <string name="not_installed_link_text">
+        To use this sample, please install or update the Health Connect package via Google Play.
+    </string>
+
+
+    <string name="not_supported_url">https://developer.android.com/health-connect</string>
+    <string name="not_supported_description">
+        Health Connect is only supported on Android devices running API level _SDK_ or above.
+    </string>
+    <string name="not_supported_link_text">
+        Please visit the Health Connect guides to learn more about device compatibility and using
+        Health Connect.
+    </string>
+
+    <string-array name="sleep_notes_array">
+        <item>I slept great!</item>
+        <item>I got woken up</item>
+        <item>Struggled to sleep</item>
+        <item>Much needed sleep</item>
+        <item>Restful sleep</item>
+    </string-array>
+</resources>

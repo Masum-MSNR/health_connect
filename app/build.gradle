@@ -1,0 +1,89 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+}
+
+android {
+    namespace 'dev.almasum.health_connect'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "dev.almasum.health_connect"
+        minSdk 27
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures{
+        viewBinding = true
+    }
+}
+
+dependencies {
+
+    implementation libs.androidx.core
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+
+    def composeBom = libs.androidx.compose.bom
+    implementation(platform(composeBom))
+
+    def activity_compose_version = '1.9.1'
+    def hilt_navigation_compose_version = '1.0.0'
+    def navigation_compose_version = '2.7.7'
+
+    def concurrent_futures_version = '1.2.0'
+    def health_connect_version = '1.1.0-alpha07'
+    def lifecycle_version = '2.8.4'
+
+    // For Health Connect
+    implementation "androidx.health.connect:connect-client:$health_connect_version"
+
+    // Fix permissions issue until 1.1.0-alpha02
+
+    // For viewmodel support
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
+
+    // To bridge between ListenableFuture and suspend functions
+    implementation "androidx.concurrent:concurrent-futures-ktx:$concurrent_futures_version"
+
+    // Icons
+    implementation libs.androidx.material.icons.extended
+    implementation libs.accompanist.drawablepainter
+
+    implementation libs.androidx.ui
+    implementation libs.androidx.material
+    implementation libs.androidx.ui.tooling.preview
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "androidx.activity:activity-compose:$activity_compose_version"
+
+    debugImplementation libs.androidx.ui.tooling
+
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.2"
+}
