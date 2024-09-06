@@ -25,6 +25,7 @@
         Please visit the Health Connect guides to learn more about device compatibility and using
         Health Connect.
     </string>
+    <string name="grant_permissions">Grant permissions</string>
 
     <string-array name="sleep_notes_array">
         <item>I slept great!</item>
