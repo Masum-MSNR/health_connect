@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">health_connect</string>
+    <string name="app_name">Health Connect Ext</string>
 
     <string name="installed_welcome_message">
         Health Connect is installed on this device. Use the menu to explore the sample, with each
