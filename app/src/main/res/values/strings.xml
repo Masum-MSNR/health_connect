@@ -26,6 +26,7 @@
         Health Connect.
     </string>
     <string name="grant_permissions">Grant permissions</string>
+    <string name="open_health_data">Open Health Data</string>
 
     <string-array name="sleep_notes_array">
         <item>I slept great!</item>

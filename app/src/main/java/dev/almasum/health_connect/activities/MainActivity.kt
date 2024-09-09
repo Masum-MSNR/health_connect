@@ -12,18 +12,18 @@ import androidx.health.connect.client.PermissionController
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dev.almasum.health_connect.R
-import dev.almasum.health_connect.data.HealthConnectManager
 import dev.almasum.health_connect.data.MIN_SUPPORTED_SDK
 import dev.almasum.health_connect.databinding.ActivityMainBinding
 import dev.almasum.health_connect.viewModels.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var healthConnectManager: HealthConnectManager
 
     private lateinit var healthConnectAvailabilityObserver: Observer<Int>
     private lateinit var viewModel: MainViewModel
@@ -45,8 +45,14 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.initHealthConnectManager(this)
 
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.readStepsByTimeRange(
+                startTime = Instant.now().minus(25, ChronoUnit.DAYS),
+                endTime = Instant.now()
+            )
+        }
+
         supportActionBar?.title = "Health Connect"
-        healthConnectManager = HealthConnectManager(this)
 
         healthConnectAvailabilityObserver = Observer {
             when (it) {
@@ -82,11 +88,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        healthConnectManager.availability.observe(this, healthConnectAvailabilityObserver)
+        viewModel.availability.observe(this, healthConnectAvailabilityObserver)
         viewModel.permissionGranted.observe(this) {
             if (it) {
                 binding.grantPermissions.visibility = View.GONE
+                binding.healthData.visibility = View.VISIBLE
+                binding.healthData.setOnClickListener {
+                    val intent = Intent(this, HealthDataActivity::class.java)
+                    startActivity(intent)
+                }
             } else {
+                binding.healthData.visibility = View.GONE
                 binding.grantPermissions.visibility = View.VISIBLE
                 binding.grantPermissions.setOnClickListener {
                     onGrantPermissionsClick()
@@ -104,7 +116,6 @@ class MainActivity : AppCompatActivity() {
         val url = getString(R.string.not_supported_url)
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
-
     }
 
 
@@ -125,5 +136,6 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.checkPermission()
         }
+        viewModel.checkAvailability(this)
     }
 }

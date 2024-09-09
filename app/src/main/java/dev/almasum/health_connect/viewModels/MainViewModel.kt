@@ -1,8 +1,9 @@
 package dev.almasum.health_connect.viewModels
 
 import android.content.Context
+import android.util.Log
 import androidx.health.connect.client.HealthConnectClient
-import androidx.health.connect.client.PermissionController
+import androidx.health.connect.client.HealthConnectClient.Companion.SDK_UNAVAILABLE
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.BloodPressureRecord
 import androidx.health.connect.client.records.BodyTemperatureRecord
@@ -11,14 +12,18 @@ import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.health.connect.client.records.RespiratoryRateRecord
 import androidx.health.connect.client.records.StepsRecord
+import androidx.health.connect.client.request.ReadRecordsRequest
+import androidx.health.connect.client.time.TimeRangeFilter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.time.Instant
 
 class MainViewModel : ViewModel() {
 
+
     private lateinit var healthConnectClient: HealthConnectClient
     var permissionGranted = MutableLiveData(false)
-
+    val availability = MutableLiveData(SDK_UNAVAILABLE)
 
     fun initHealthConnectManager(context: Context) {
         healthConnectClient = HealthConnectClient.getOrCreate(context)
@@ -40,5 +45,9 @@ class MainViewModel : ViewModel() {
             healthConnectClient.permissionController.getGrantedPermissions()
                 .containsAll(permissions)
         )
+    }
+
+    fun checkAvailability(context: Context) {
+        availability.value = HealthConnectClient.getSdkStatus(context)
     }
 }

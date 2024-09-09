@@ -51,4 +51,16 @@
         android:visibility="gone"
         app:cornerRadius="25dp" />
 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/health_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/primary_text"
+        android:layout_margin="20dp"
+        android:text="@string/open_health_data"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        app:cornerRadius="25dp" />
+
 </RelativeLayout>
