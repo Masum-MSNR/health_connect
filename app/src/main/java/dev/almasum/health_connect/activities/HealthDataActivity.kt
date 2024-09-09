@@ -1,5 +1,6 @@
 package dev.almasum.health_connect.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -8,12 +9,15 @@ import dev.almasum.health_connect.viewModels.HealthDataViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class HealthDataActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHealthDataBinding
     private lateinit var viewModel: HealthDataViewModel
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHealthDataBinding.inflate(layoutInflater)
@@ -22,6 +26,7 @@ class HealthDataActivity : AppCompatActivity() {
         viewModel.initHealthConnectManager(this)
 
         supportActionBar?.title = "Health Data"
+        supportActionBar?.elevation = 10f
 
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.readSteps()
@@ -39,21 +44,21 @@ class HealthDataActivity : AppCompatActivity() {
                 steps = it.toInt()
             }
             var left = 0
-            if(steps<=10000){
+            if (steps <= 10000) {
                 left = 10000 - steps
             }
             binding.stepsOutOfTotal.text = "$steps of 10000 steps"
             binding.stepsLeft.text = "$left left"
             var parcent = 0
-            if(steps!=0){
-                parcent = steps*100/10000
+            if (steps != 0) {
+                parcent = steps * 100 / 10000
             }
             binding.stepsProgress.progress = parcent
             binding.stepsPercent.text = "$parcent%"
         }
 
         viewModel.heartRate.observe(this) {
-            if(it==null||it=="--"||it=="0.0"){
+            if (it == null || it == "--" || it == "0.0") {
                 binding.heartRate.text = "--"
                 return@observe
             }
@@ -61,7 +66,7 @@ class HealthDataActivity : AppCompatActivity() {
         }
 
         viewModel.respiratoryRate.observe(this) {
-            if(it==null||it=="--"||it=="0.0"){
+            if (it == null || it == "--" || it == "0.0") {
                 binding.respiratoryRate.text = "--"
                 return@observe
             }
@@ -69,7 +74,7 @@ class HealthDataActivity : AppCompatActivity() {
         }
 
         viewModel.systolicBp.observe(this) {
-            if(it==null||it=="--"||it=="0.0"){
+            if (it == null || it == "--" || it == "0.0") {
                 binding.systolic.text = "--"
                 return@observe
             }
@@ -77,7 +82,7 @@ class HealthDataActivity : AppCompatActivity() {
         }
 
         viewModel.diastolicBp.observe(this) {
-            if(it==null||it=="--"||it=="0.0"){
+            if (it == null || it == "--" || it == "0.0") {
                 binding.diastolic.text = "--"
                 return@observe
             }
@@ -85,7 +90,7 @@ class HealthDataActivity : AppCompatActivity() {
         }
 
         viewModel.oxygenLevel.observe(this) {
-            if(it==null||it=="--"||it=="0.0"){
+            if (it == null || it == "--" || it == "0.0") {
                 binding.oxygenLevel.text = "--"
                 return@observe
             }
@@ -93,11 +98,15 @@ class HealthDataActivity : AppCompatActivity() {
         }
 
         viewModel.bodyTemp.observe(this) {
-            if(it==null||it=="--"||it=="0.0"){
+            if (it == null || it == "--" || it == "0.0") {
                 binding.bodyTemp.text = "--"
                 return@observe
             }
             binding.bodyTemp.text = "${it}°C"
         }
+
+        val dateFormatter = SimpleDateFormat("MMM, dd yyyy", Locale.getDefault())
+        val date = dateFormatter.format(java.util.Date())
+        binding.todayDate.text = date
     }
 }

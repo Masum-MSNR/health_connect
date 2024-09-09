@@ -14,10 +14,12 @@
         <item name="android:windowLightStatusBar">true</item>
 
         <item name="actionBarTheme">@style/MyActionBarTheme</item>
+        <item name="android:windowBackground">@color/white</item>
 
     </style>
     <style name="MyActionBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Set the action bar title text color -->
         <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:background">@color/white</item>
     </style>
 </resources>

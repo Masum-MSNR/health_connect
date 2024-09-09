@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".activities.HealthDataActivity">
 
@@ -19,12 +20,13 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/today_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:text="Sep, 19 2022"
         android:textColor="@android:color/darker_gray"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="---, -- ----" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -161,6 +163,7 @@
                     android:id="@+id/heart_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/darker_gray"
                     tools:text="-- bpm" />
 
             </LinearLayout>
@@ -208,6 +211,7 @@
                     android:id="@+id/respiratory_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/darker_gray"
                     tools:text="-- bpm" />
 
             </LinearLayout>
@@ -281,6 +285,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
+                        android:textColor="@android:color/darker_gray"
                         tools:text="-- mmHg" />
                 </LinearLayout>
 
@@ -305,6 +310,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
+                        android:textColor="@android:color/darker_gray"
                         tools:text="102 mmHg" />
                 </LinearLayout>
             </LinearLayout>
@@ -360,6 +366,7 @@
                     android:id="@+id/oxygen_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/darker_gray"
                     tools:text="--" />
 
             </LinearLayout>
@@ -407,6 +414,7 @@
                     android:id="@+id/body_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/darker_gray"
                     tools:text="-- C" />
 
             </LinearLayout>

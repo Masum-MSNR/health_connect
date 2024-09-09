@@ -1,7 +1,6 @@
 package dev.almasum.health_connect.viewModels
 
 import android.content.Context
-import android.util.Log
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.HealthConnectClient.Companion.SDK_UNAVAILABLE
 import androidx.health.connect.client.permission.HealthPermission
@@ -12,23 +11,26 @@ import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.health.connect.client.records.RespiratoryRateRecord
 import androidx.health.connect.client.records.StepsRecord
-import androidx.health.connect.client.request.ReadRecordsRequest
-import androidx.health.connect.client.time.TimeRangeFilter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.time.Instant
 
 class MainViewModel : ViewModel() {
 
 
     private lateinit var healthConnectClient: HealthConnectClient
+    var healthConnectInitiated = false
     var permissionGranted = MutableLiveData(false)
     val availability = MutableLiveData(SDK_UNAVAILABLE)
 
     fun initHealthConnectManager(context: Context) {
         healthConnectClient = HealthConnectClient.getOrCreate(context)
+        healthConnectInitiated = true
     }
 
+
+    fun cleanHealthConnectManager() {
+        healthConnectInitiated = false
+    }
 
     val permissions = setOf(
         HealthPermission.getReadPermission(StepsRecord::class),

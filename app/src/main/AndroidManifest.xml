@@ -34,17 +34,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Health_connect"
         tools:targetApi="31">
-        <activity
-            android:name=".activities.HealthDataActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.MainActivity"
+        <activity android:name=".activities.LauncherActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
 
             <!--
                 The app needs to handle this intent and display an appropriate privacy policy
@@ -64,6 +61,12 @@
                 <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.HealthDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

@@ -4,8 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.health.connect.client.HealthConnectClient.Companion.SDK_AVAILABLE
 import androidx.health.connect.client.HealthConnectClient.Companion.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED
@@ -18,8 +18,6 @@ import dev.almasum.health_connect.viewModels.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.Instant
-import java.time.temporal.ChronoUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,9 +30,7 @@ class MainActivity : AppCompatActivity() {
     private val requestPermissions =
         registerForActivityResult(requestPermissionActivityContract) { granted ->
             if (granted.containsAll(viewModel.permissions)) {
-                // Permissions successfully granted
-            } else {
-                // Lack of required permissions
+                Toast.makeText(this, "All Permission Granted", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -43,23 +39,32 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.initHealthConnectManager(this)
 
-        supportActionBar?.title = "Health Connect"
+        supportActionBar?.hide()
 
         healthConnectAvailabilityObserver = Observer {
             when (it) {
                 SDK_AVAILABLE -> {
+                    if (!viewModel.healthConnectInitiated) {
+                        viewModel.initHealthConnectManager(this)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            viewModel.checkPermission()
+                        }
+                    }
                     binding.primaryText.text = getString(R.string.installed_welcome_message)
                     binding.secondaryText.text = ""
                     binding.secondaryText.visibility = View.GONE
                 }
 
                 SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED -> {
+                    if (viewModel.healthConnectInitiated) {
+                        viewModel.cleanHealthConnectManager()
+                    }
                     binding.primaryText.text = getString(R.string.not_installed_description)
                     binding.secondaryText.text = getString(R.string.not_installed_link_text)
                     binding.secondaryText.visibility = View.VISIBLE
                     binding.grantPermissions.visibility = View.GONE
+                    binding.healthData.visibility = View.GONE
                     binding.secondaryText.setOnClickListener {
                         onInstallClick()
                     }
@@ -88,6 +93,7 @@ class MainActivity : AppCompatActivity() {
                 binding.healthData.visibility = View.VISIBLE
                 binding.healthData.setOnClickListener {
                     val intent = Intent(this, HealthDataActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 }
             } else {
@@ -102,7 +108,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun onGrantPermissionsClick() {
         requestPermissions.launch(viewModel.permissions)
-        Log.v("MainActivity", "Requesting permissions")
     }
 
     private fun onLearnMoreClick() {
@@ -127,7 +132,13 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         CoroutineScope(Dispatchers.IO).launch {
-            viewModel.checkPermission()
+            if (viewModel.healthConnectInitiated) {
+                try {
+                    viewModel.checkPermission()
+                } catch (e: Exception) {
+                    println(e.message)
+                }
+            }
         }
         viewModel.checkAvailability(this)
     }
