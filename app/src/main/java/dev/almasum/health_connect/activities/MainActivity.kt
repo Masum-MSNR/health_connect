@@ -2,6 +2,7 @@ package dev.almasum.health_connect.activities
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,7 +13,6 @@ import androidx.health.connect.client.PermissionController
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dev.almasum.health_connect.R
-import dev.almasum.health_connect.data.MIN_SUPPORTED_SDK
 import dev.almasum.health_connect.databinding.ActivityMainBinding
 import dev.almasum.health_connect.viewModels.MainViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     binding.primaryText.text =
                         getString(R.string.not_supported_description).replace(
                             "_SDK_",
-                            MIN_SUPPORTED_SDK.toString()
+                            Build.VERSION_CODES.O_MR1.toString()
                         )
                     binding.secondaryText.text = getString(R.string.not_supported_link_text)
                     binding.secondaryText.visibility = View.VISIBLE
