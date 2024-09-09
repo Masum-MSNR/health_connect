@@ -27,6 +27,14 @@
     </string>
     <string name="grant_permissions">Grant permissions</string>
     <string name="open_health_data">Open Health Data</string>
+    <string name="steps">Steps</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="respiratory_rate">Respiratory Rate</string>
+    <string name="blood_pressure">Blood Pressure</string>
+    <string name="systolic">Systolic</string>
+    <string name="diastolic">Diastolic</string>
+    <string name="oxygen_level">Oxygen Level</string>
+    <string name="body_temp">Body Temp</string>
 
     <string-array name="sleep_notes_array">
         <item>I slept great!</item>

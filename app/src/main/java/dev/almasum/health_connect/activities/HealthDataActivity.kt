@@ -2,17 +2,102 @@ package dev.almasum.health_connect.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import dev.almasum.health_connect.databinding.ActivityHealthDataBinding
+import dev.almasum.health_connect.viewModels.HealthDataViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HealthDataActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHealthDataBinding
+    private lateinit var viewModel: HealthDataViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHealthDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this)[HealthDataViewModel::class.java]
+        viewModel.initHealthConnectManager(this)
 
         supportActionBar?.title = "Health Data"
+
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.readSteps()
+            viewModel.readHeartRate()
+            viewModel.readRespiratoryRate()
+            viewModel.readBloodPressure()
+            viewModel.readOxygenLevel()
+            viewModel.readBodyTemperature()
+        }
+
+        viewModel.steps.observe(this) {
+            var steps = 0
+
+            if (it != null && it != "--") {
+                steps = it.toInt()
+            }
+            var left = 0
+            if(steps<=10000){
+                left = 10000 - steps
+            }
+            binding.stepsOutOfTotal.text = "$steps of 10000 steps"
+            binding.stepsLeft.text = "$left left"
+            var parcent = 0
+            if(steps!=0){
+                parcent = steps*100/10000
+            }
+            binding.stepsProgress.progress = parcent
+            binding.stepsPercent.text = "$parcent%"
+        }
+
+        viewModel.heartRate.observe(this) {
+            if(it==null||it=="--"||it=="0.0"){
+                binding.heartRate.text = "--"
+                return@observe
+            }
+            binding.heartRate.text = "${it} bpm"
+        }
+
+        viewModel.respiratoryRate.observe(this) {
+            if(it==null||it=="--"||it=="0.0"){
+                binding.respiratoryRate.text = "--"
+                return@observe
+            }
+            binding.respiratoryRate.text = "${it} bpm"
+        }
+
+        viewModel.systolicBp.observe(this) {
+            if(it==null||it=="--"||it=="0.0"){
+                binding.systolic.text = "--"
+                return@observe
+            }
+            binding.systolic.text = "${it} mmHg"
+        }
+
+        viewModel.diastolicBp.observe(this) {
+            if(it==null||it=="--"||it=="0.0"){
+                binding.diastolic.text = "--"
+                return@observe
+            }
+            binding.diastolic.text = "${it} mmHg"
+        }
+
+        viewModel.oxygenLevel.observe(this) {
+            if(it==null||it=="--"||it=="0.0"){
+                binding.oxygenLevel.text = "--"
+                return@observe
+            }
+            binding.oxygenLevel.text = "${it}%"
+        }
+
+        viewModel.bodyTemp.observe(this) {
+            if(it==null||it=="--"||it=="0.0"){
+                binding.bodyTemp.text = "--"
+                return@observe
+            }
+            binding.bodyTemp.text = "${it}°C"
+        }
     }
 }

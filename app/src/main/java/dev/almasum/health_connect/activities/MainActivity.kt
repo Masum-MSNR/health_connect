@@ -45,13 +45,6 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.initHealthConnectManager(this)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            viewModel.readStepsByTimeRange(
-                startTime = Instant.now().minus(25, ChronoUnit.DAYS),
-                endTime = Instant.now()
-            )
-        }
-
         supportActionBar?.title = "Health Connect"
 
         healthConnectAvailabilityObserver = Observer {
