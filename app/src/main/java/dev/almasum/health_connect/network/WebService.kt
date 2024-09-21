@@ -64,7 +64,7 @@ interface WebService {
         @Query("providerId") providerId: Int
     ): Call<ResponseEntity>
 
-    @POST("insertClientStepsRecord")
+    @POST("/insertClientStepsRecord")
     fun insertClientStepsRecord(
         @Query("steps") steps: Int,
         @Query("beginDate") beginDate: String,
@@ -73,7 +73,7 @@ interface WebService {
         @Query("zoneId") zoneId: String
     ): Call<ResponseEntity>
 
-    @POST("insertClientOxygenSaturationRecord")
+    @POST("/insertClientOxygenSaturationRecord")
     fun insertClientOxygenSaturationRecord(
         @Query("oxygenSaturationPercent") oxygenSaturationPercent: Double,
         @Query("timeOxygenRecordTaken") timeOxygenRecordTaken: String,

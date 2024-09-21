@@ -1,14 +1,20 @@
 package dev.almasum.health_connect.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import dev.almasum.health_connect.R
 import dev.almasum.health_connect.databinding.ActivityHealthDataBinding
+import dev.almasum.health_connect.utils.AlarmHelper
+import dev.almasum.health_connect.utils.DataUploader
 import dev.almasum.health_connect.utils.Prefs
 import dev.almasum.health_connect.viewModels.HealthDataViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -35,6 +41,17 @@ class HealthDataActivity : AppCompatActivity() {
 
         binding.welcomeText.text = "Hi, ${Prefs.firstName}"
 
+        AlarmHelper.setSingleAlarm(this)
+
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.SCHEDULE_EXACT_ALARM) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val intentX = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+                intentX.putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+                startActivity(intentX)
+            }
+        }
+
+
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.readSteps()
             viewModel.readHeartRate()
@@ -42,6 +59,8 @@ class HealthDataActivity : AppCompatActivity() {
             viewModel.readBloodPressure()
             viewModel.readOxygenLevel()
             viewModel.readBodyTemperature()
+            DataUploader.uploadSteps(this@HealthDataActivity)
+            DataUploader.uploadOxygen(this@HealthDataActivity)
         }
 
         viewModel.steps.observe(this) {
