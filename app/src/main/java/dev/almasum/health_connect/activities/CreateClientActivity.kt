@@ -24,6 +24,7 @@ class CreateClientActivity : AppCompatActivity() {
         binding = ActivityCreateClientBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.title = "Create Client"
+        supportActionBar?.elevation = 10f
 
         loadingDialog = LoadingDialog()
 

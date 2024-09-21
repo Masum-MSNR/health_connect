@@ -39,6 +39,11 @@
     <string name="last_name">Last Name</string>
     <string name="phone">Phone</string>
     <string name="email">Email</string>
+    <string name="save">Save</string>
+    <string name="minutes">minutes</string>
+    <string name="enter_interval">Enter Interval</string>
+    <string name="interval">Interval</string>
+    <string name="settings">Settings</string>
 
     <string-array name="sleep_notes_array">
         <item>I slept great!</item>

@@ -1,9 +1,13 @@
 package dev.almasum.health_connect.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import dev.almasum.health_connect.R
 import dev.almasum.health_connect.databinding.ActivityHealthDataBinding
 import dev.almasum.health_connect.utils.Prefs
 import dev.almasum.health_connect.viewModels.HealthDataViewModel
@@ -111,5 +115,18 @@ class HealthDataActivity : AppCompatActivity() {
         val dateFormatter = SimpleDateFormat("MMM, dd yyyy", Locale.getDefault())
         val date = dateFormatter.format(java.util.Date())
         binding.todayDate.text = date
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.settings) {
+            startActivity(Intent(this, SettingsActivity::class.java))
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
