@@ -1,6 +1,7 @@
 package dev.almasum.health_connect.utils
 
 import android.content.Context
+import android.util.Log
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.health.connect.client.records.StepsRecord
@@ -34,8 +35,8 @@ object DataUploader {
                 count += it.count
             }
 
-            val beginDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(startTime)
-            val endDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(timeNow)
+            val beginDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(System.currentTimeMillis()-(Prefs.interval*60*1000))
+            val endDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(System.currentTimeMillis())
 
             val call = WebService.getClient().insertClientStepsRecord(
                 steps = count.toInt(),
@@ -50,16 +51,17 @@ object DataUploader {
                     call: Call<ResponseEntity>,
                     response: Response<ResponseEntity>
                 ) {
-                    //ignored
+                    Log.v("TAG", response.code().toString())
                 }
 
                 override fun onFailure(call: Call<ResponseEntity>, t: Throwable) {
-                    //ignored
+                    Log.v("TAG", t.message.toString())
                 }
             })
 
         } catch (e: Exception) {
             println(e.message)
+            e.printStackTrace()
         }
     }
 
@@ -81,7 +83,7 @@ object DataUploader {
                 level = it.percentage.value
             }
 
-            val currentTime = SimpleDateFormat("yyyy-MM-dd mm:ss", Locale.getDefault()).format(timeNow)
+            val currentTime = SimpleDateFormat("yyyy-MM-dd mm:ss", Locale.getDefault()).format(System.currentTimeMillis())
 
             val call = WebService.getClient().insertClientOxygenSaturationRecord(
                 oxygenSaturationPercent = level,
@@ -95,16 +97,17 @@ object DataUploader {
                     call: Call<ResponseEntity>,
                     response: Response<ResponseEntity>
                 ) {
-                    //ignored
+                    Log.v("TAG", response.code().toString())
                 }
 
                 override fun onFailure(call: Call<ResponseEntity>, t: Throwable) {
-                    //ignored
+                    Log.v("TAG", t.message.toString())
                 }
             })
 
         } catch (e: Exception) {
             println(e.message)
+            e.printStackTrace()
         }
     }
 }

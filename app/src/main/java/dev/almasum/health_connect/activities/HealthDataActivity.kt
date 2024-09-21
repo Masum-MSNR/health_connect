@@ -1,18 +1,19 @@
 package dev.almasum.health_connect.activities
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.AlarmManager
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import dev.almasum.health_connect.R
 import dev.almasum.health_connect.databinding.ActivityHealthDataBinding
+import dev.almasum.health_connect.dialogs.AlarmPermissionDialog
 import dev.almasum.health_connect.utils.AlarmHelper
 import dev.almasum.health_connect.utils.DataUploader
 import dev.almasum.health_connect.utils.Prefs
@@ -27,7 +28,9 @@ class HealthDataActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHealthDataBinding
     private lateinit var viewModel: HealthDataViewModel
+    private lateinit var alarmPermissionDialog: AlarmPermissionDialog
 
+    @RequiresApi(Build.VERSION_CODES.S)
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +44,14 @@ class HealthDataActivity : AppCompatActivity() {
 
         binding.welcomeText.text = "Hi, ${Prefs.firstName}"
 
-        AlarmHelper.setSingleAlarm(this)
-
-        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.SCHEDULE_EXACT_ALARM) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        alarmPermissionDialog =
+            AlarmPermissionDialog("Schedule alarm permission is required to update data to server periodically.") {
                 val intentX = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
                 intentX.putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
                 startActivity(intentX)
+                alarmPermissionDialog.dismiss()
             }
-        }
+        alarmPermissionDialog.isCancelable = false
 
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -147,5 +149,19 @@ class HealthDataActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (!alarmManager.canScheduleExactAlarms()) {
+                alarmPermissionDialog.show(supportFragmentManager, "alarmPermissionDialog")
+            } else {
+                AlarmHelper.setSingleAlarm(this)
+            }
+        } else {
+            AlarmHelper.setSingleAlarm(this)
+        }
     }
 }

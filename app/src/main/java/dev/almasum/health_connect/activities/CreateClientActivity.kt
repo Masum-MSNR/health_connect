@@ -27,6 +27,7 @@ class CreateClientActivity : AppCompatActivity() {
         supportActionBar?.elevation = 10f
 
         loadingDialog = LoadingDialog()
+        loadingDialog.isCancelable = false
 
         binding.createClientBt.setOnClickListener {
             if (validate()) {

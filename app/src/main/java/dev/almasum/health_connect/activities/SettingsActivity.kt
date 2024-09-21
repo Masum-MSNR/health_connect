@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dev.almasum.health_connect.databinding.ActivitySettingsBinding
+import dev.almasum.health_connect.utils.AlarmHelper
 import dev.almasum.health_connect.utils.Prefs
 
 class SettingsActivity : AppCompatActivity() {
@@ -45,6 +46,7 @@ class SettingsActivity : AppCompatActivity() {
                 return false
             }
             Prefs.interval = minute
+            AlarmHelper.setSingleAlarm(this)
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
             return true
         } catch (e: Exception) {
