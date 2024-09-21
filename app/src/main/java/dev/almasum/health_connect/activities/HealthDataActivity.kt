@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import dev.almasum.health_connect.databinding.ActivityHealthDataBinding
+import dev.almasum.health_connect.utils.Prefs
 import dev.almasum.health_connect.viewModels.HealthDataViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +28,8 @@ class HealthDataActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Health Data"
         supportActionBar?.elevation = 10f
+
+        binding.welcomeText.text = "Hi, ${Prefs.firstName}"
 
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.readSteps()

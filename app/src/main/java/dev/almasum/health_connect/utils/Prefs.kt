@@ -24,4 +24,24 @@ object Prefs {
         get() = preferences.getLong(INTERVAL_IN_MINUTES, 30)
         set(value) = preferences.edit { it.putLong(INTERVAL_IN_MINUTES, value) }
 
+
+    var firstName: String
+        get() = preferences.getString("first_name", "") ?: ""
+        set(value) = preferences.edit { it.putString("first_name", value) }
+
+    var lastName: String
+        get() = preferences.getString("last_name", "") ?: ""
+        set(value) = preferences.edit { it.putString("last_name", value) }
+
+    var phone: String
+        get() = preferences.getString("phone", "") ?: ""
+        set(value) = preferences.edit { it.putString("phone", value) }
+
+    var email: String
+        get() = preferences.getString("email", "") ?: ""
+        set(value) = preferences.edit { it.putString("email", value) }
+
+    var clientId: String
+        get() = preferences.getString("client_id", "") ?: ""
+        set(value) = preferences.edit { it.putString("client_id", value) }
 }

@@ -86,4 +86,12 @@ dependencies {
     debugImplementation libs.androidx.ui.tooling
 
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.2"
+
+
+    //retrofit
+    implementation libs.gson
+    implementation libs.retrofit
+    implementation libs.converter.gson
+    implementation libs.logging.interceptor
+
 }

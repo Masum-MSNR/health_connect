@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                 binding.grantPermissions.visibility = View.GONE
                 binding.healthData.visibility = View.VISIBLE
                 binding.healthData.setOnClickListener {
-                    val intent = Intent(this, HealthDataActivity::class.java)
+                    val intent = Intent(this, CreateClientActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 }

@@ -34,6 +34,11 @@
     <string name="diastolic">Diastolic</string>
     <string name="oxygen_level">Oxygen Level</string>
     <string name="body_temp">Body Temp</string>
+    <string name="create_client">Create Client</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
 
     <string-array name="sleep_notes_array">
         <item>I slept great!</item>
