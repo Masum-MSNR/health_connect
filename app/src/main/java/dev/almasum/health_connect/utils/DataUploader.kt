@@ -18,7 +18,7 @@ import java.time.temporal.ChronoUnit
 import java.util.Locale
 
 object DataUploader {
-     suspend fun uploadSteps(context: Context) {
+    suspend fun uploadSteps(context: Context, onDone: () -> Unit) {
         val healthConnectClient = HealthConnectClient.getOrCreate(context)
         Prefs.init(context)
         try {
@@ -35,8 +35,14 @@ object DataUploader {
                 count += it.count
             }
 
-            val beginDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(System.currentTimeMillis()-(Prefs.interval*60*1000))
-            val endDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(System.currentTimeMillis())
+            val beginDate = SimpleDateFormat(
+                "yyyy-MM-dd",
+                Locale.getDefault()
+            ).format(System.currentTimeMillis() - (Prefs.interval * 60 * 1000))
+            val endDate = SimpleDateFormat(
+                "yyyy-MM-dd",
+                Locale.getDefault()
+            ).format(System.currentTimeMillis())
 
             val call = WebService.getClient().insertClientStepsRecord(
                 steps = count.toInt(),
@@ -51,21 +57,23 @@ object DataUploader {
                     call: Call<ResponseEntity>,
                     response: Response<ResponseEntity>
                 ) {
+                    onDone.invoke()
                     Log.v("TAG", response.code().toString())
                 }
 
                 override fun onFailure(call: Call<ResponseEntity>, t: Throwable) {
                     Log.v("TAG", t.message.toString())
+                    onDone.invoke()
                 }
             })
-
         } catch (e: Exception) {
             println(e.message)
             e.printStackTrace()
+            onDone.invoke()
         }
     }
 
-     suspend fun uploadOxygen(context: Context) {
+    suspend fun uploadOxygen(context: Context, onDone: () -> Unit) {
         val healthConnectClient = HealthConnectClient.getOrCreate(context)
         Prefs.init(context)
         try {
@@ -83,7 +91,10 @@ object DataUploader {
                 level = it.percentage.value
             }
 
-            val currentTime = SimpleDateFormat("yyyy-MM-dd mm:ss", Locale.getDefault()).format(System.currentTimeMillis())
+            val currentTime = SimpleDateFormat(
+                "yyyy-MM-dd mm:ss",
+                Locale.getDefault()
+            ).format(System.currentTimeMillis())
 
             val call = WebService.getClient().insertClientOxygenSaturationRecord(
                 oxygenSaturationPercent = level,
@@ -97,17 +108,20 @@ object DataUploader {
                     call: Call<ResponseEntity>,
                     response: Response<ResponseEntity>
                 ) {
+                    onDone.invoke()
                     Log.v("TAG", response.code().toString())
                 }
 
                 override fun onFailure(call: Call<ResponseEntity>, t: Throwable) {
                     Log.v("TAG", t.message.toString())
+                    onDone.invoke()
                 }
             })
 
         } catch (e: Exception) {
             println(e.message)
             e.printStackTrace()
+            onDone.invoke()
         }
     }
 }

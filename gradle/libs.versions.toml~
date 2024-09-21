@@ -15,7 +15,6 @@ material = "1.12.0"
 activity = "1.9.2"
 constraintlayout = "2.1.4"
 retrofit = "2.9.0"
-lifecycleService = "2.8.6"
 
 [libraries]
 accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanistDrawablepainter" }
@@ -38,7 +37,6 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-androidx-lifecycle-service = { group = "androidx.lifecycle", name = "lifecycle-service", version.ref = "lifecycleService" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

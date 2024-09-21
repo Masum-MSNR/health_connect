@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.health.READ_RESPIRATORY_RATE" />
     <uses-permission android:name="android.permission.health.READ_OXYGEN_SATURATION" />
     <uses-permission android:name="android.permission.health.READ_BODY_TEMPERATURE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
     <queries>
         <package android:name="com.google.android.apps.healthdata" />
@@ -94,6 +96,12 @@
             android:name=".receivers.TaskReceiver"
             android:enabled="true"
             android:exported="false" />
+
+        <service
+            android:name=".services.DataUploaderService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
     </application>
 
 </manifest>

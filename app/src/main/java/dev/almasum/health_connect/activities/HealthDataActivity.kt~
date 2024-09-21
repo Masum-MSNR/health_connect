@@ -61,10 +61,8 @@ class HealthDataActivity : AppCompatActivity() {
             viewModel.readBloodPressure()
             viewModel.readOxygenLevel()
             viewModel.readBodyTemperature()
-            DataUploader.uploadSteps(this@HealthDataActivity) {
-            }
-            DataUploader.uploadOxygen(this@HealthDataActivity) {
-            }
+            DataUploader.uploadSteps(this@HealthDataActivity)
+            DataUploader.uploadOxygen(this@HealthDataActivity)
         }
 
         viewModel.steps.observe(this) {
