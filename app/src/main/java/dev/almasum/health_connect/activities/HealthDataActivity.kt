@@ -39,6 +39,8 @@ class HealthDataActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[HealthDataViewModel::class.java]
         viewModel.initHealthConnectManager(this)
 
+        binding.bottomNav.background = null
+        binding.bottomNav.menu.getItem(2).isEnabled = false
         supportActionBar?.title = "Health Data"
         supportActionBar?.elevation = 10f
 
@@ -64,6 +66,21 @@ class HealthDataActivity : AppCompatActivity() {
             DataUploader.uploadSteps(this@HealthDataActivity) {
             }
             DataUploader.uploadOxygen(this@HealthDataActivity) {
+            }
+        }
+
+        binding.fab.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.readSteps()
+                viewModel.readHeartRate()
+                viewModel.readRespiratoryRate()
+                viewModel.readBloodPressure()
+                viewModel.readOxygenLevel()
+                viewModel.readBodyTemperature()
+                DataUploader.uploadSteps(this@HealthDataActivity) {
+                }
+                DataUploader.uploadOxygen(this@HealthDataActivity) {
+                }
             }
         }
 

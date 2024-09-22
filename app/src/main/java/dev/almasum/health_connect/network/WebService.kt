@@ -37,7 +37,7 @@ interface WebService {
 
         private var httpUrl = HttpUrl.Builder()
             .scheme("https")
-            .host("hb-dev1-api.ogenushealth.com")
+            .host("hb-tst1-api.ogenushealth.com")
             .build()
 
         fun getClient(): WebService = create(httpUrl)

@@ -1,425 +1,455 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
     tools:context=".activities.HealthDataActivity">
-
-    <TextView
-        android:id="@+id/welcome_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Hi, Masum"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/today_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="14sp"
-        tools:text="---, -- ----" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/steps"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/steps_out_of_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@android:color/darker_gray"
-                    android:textStyle="bold"
-                    tools:text="0 of 10000 steps" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:cardBackgroundColor="@android:color/darker_gray"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp">
-
-                    <TextView
-                        android:id="@+id/steps_left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="3dp"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        tools:text="10000 left" />
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true">
-
-                <com.google.android.material.progressindicator.CircularProgressIndicator
-                    android:id="@+id/steps_progress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:progress="0"
-                    app:indicatorColor="@color/black"
-                    app:indicatorSize="80dp"
-                    app:trackColor="@android:color/darker_gray"
-                    app:trackCornerRadius="10dp"
-                    app:trackThickness="12dp" />
-
-                <TextView
-                    android:id="@+id/steps_percent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:text="0%" />
-            </FrameLayout>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/welcome_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Hi, Masum"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/today_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            tools:text="---, -- ----" />
 
         <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="5dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/heart_rate"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/baseline_monitor_heart_24"
-                        app:tint="@android:color/holo_red_dark" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/heart_rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/darker_gray"
-                    tools:text="-- bpm" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="5dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/respiratory_rate"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/lungs" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/respiratory_rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/darker_gray"
-                    tools:text="-- bpm" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:padding="16dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/blood_pressure"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
 
-                <ImageView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/steps"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/steps_out_of_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@android:color/darker_gray"
+                        android:textStyle="bold"
+                        tools:text="0 of 10000 steps" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:cardBackgroundColor="@android:color/darker_gray"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:id="@+id/steps_left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="3dp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            tools:text="10000 left" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/blood_pressure"
-                    app:tint="@android:color/holo_red_dark" />
+                    android:layout_alignParentEnd="true">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/steps_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:progress="0"
+                        app:indicatorColor="@color/black"
+                        app:indicatorSize="80dp"
+                        app:trackColor="@android:color/darker_gray"
+                        app:trackCornerRadius="10dp"
+                        app:trackThickness="12dp" />
+
+                    <TextView
+                        android:id="@+id/steps_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="0%" />
+                </FrameLayout>
             </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/systolic"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-
-
-                    <TextView
-                        android:id="@+id/systolic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@android:color/darker_gray"
-                        tools:text="-- mmHg" />
-                </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/heart_rate"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/baseline_monitor_heart_24"
+                            app:tint="@android:color/holo_red_dark" />
+                    </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/heart_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/diastolic"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-
-
-                    <TextView
-                        android:id="@+id/diastolic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
                         android:textColor="@android:color/darker_gray"
-                        tools:text="102 mmHg" />
-                </LinearLayout>
-            </LinearLayout>
+                        tools:text="-- bpm" />
 
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/respiratory_rate"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/lungs" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/respiratory_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/darker_gray"
+                        tools:text="-- bpm" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
 
-    <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/blood_pressure"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/blood_pressure"
+                        app:tint="@android:color/holo_red_dark" />
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/systolic"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/systolic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@android:color/darker_gray"
+                            tools:text="-- mmHg" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/diastolic"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/diastolic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@android:color/darker_gray"
+                            tools:text="102 mmHg" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/oxygen_level"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/oxygen" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/oxygen_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/darker_gray"
+                        tools:text="--" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/body_temp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/thermometer" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/body_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/darker_gray"
+                        tools:text="-- C" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="20dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="5dp">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            app:menu="@menu/bottom_bar_menu" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/oxygen_level"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/oxygen" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/oxygen_level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/darker_gray"
-                    tools:text="--" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="5dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/body_temp"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/thermometer" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/body_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/darker_gray"
-                    tools:text="-- C" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_refresh_24"
+        app:layout_anchor="@id/bottom_bar" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
