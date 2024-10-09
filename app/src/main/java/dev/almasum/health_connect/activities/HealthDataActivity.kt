@@ -63,10 +63,13 @@ class HealthDataActivity : AppCompatActivity() {
             viewModel.readBloodPressure()
             viewModel.readOxygenLevel()
             viewModel.readBodyTemperature()
-            DataUploader.uploadSteps(this@HealthDataActivity) {
-            }
-            DataUploader.uploadOxygen(this@HealthDataActivity) {
-            }
+            DataUploader.uploadSteps(this@HealthDataActivity) {}
+            DataUploader.uploadOxygen(this@HealthDataActivity) {}
+            DataUploader.updateBodyTemperature(this@HealthDataActivity) {}
+            DataUploader.updateRespiratoryRate(this@HealthDataActivity) {}
+            DataUploader.updateHeartRate(this@HealthDataActivity) {}
+            DataUploader.updateDistanceRecord(this@HealthDataActivity) {}
+            DataUploader.updateBloodPressure(this@HealthDataActivity) {}
         }
 
         binding.fab.setOnClickListener {
@@ -77,10 +80,13 @@ class HealthDataActivity : AppCompatActivity() {
                 viewModel.readBloodPressure()
                 viewModel.readOxygenLevel()
                 viewModel.readBodyTemperature()
-                DataUploader.uploadSteps(this@HealthDataActivity) {
-                }
-                DataUploader.uploadOxygen(this@HealthDataActivity) {
-                }
+                DataUploader.uploadSteps(this@HealthDataActivity) {}
+                DataUploader.uploadOxygen(this@HealthDataActivity) {}
+                DataUploader.updateBodyTemperature(this@HealthDataActivity) {}
+                DataUploader.updateRespiratoryRate(this@HealthDataActivity) {}
+                DataUploader.updateHeartRate(this@HealthDataActivity) {}
+                DataUploader.updateDistanceRecord(this@HealthDataActivity) {}
+                DataUploader.updateBloodPressure(this@HealthDataActivity) {}
             }
         }
 

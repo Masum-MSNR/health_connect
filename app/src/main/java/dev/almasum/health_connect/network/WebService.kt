@@ -80,4 +80,54 @@ interface WebService {
         @Query("phoneNumber") phoneNumber: String,
         @Query("zoneId") zoneId: String
     ): Call<ResponseEntity>
+
+    @POST("/insertClientBodyTemperatureRecord")
+    fun insertClientBodyTemperatureRecord(
+        @Query("temperature") temperature: Float,
+        @Query("timeTemperatureTaken") timeTemperatureTaken: String,
+        @Query("phoneNumber") phoneNumber: String,
+        @Query("zoneId") zoneId: String
+    ): Call<ResponseEntity>
+
+
+    @POST("/insertClientRespiratoryRateRecord")
+    fun insertClientRespiratoryRateRecord(
+        @Query("rate") rate: Float,
+        @Query("timeRespiratoryRateTaken") timeRespiratoryRateTaken: String,
+        @Query("phoneNumber") phoneNumber: String,
+        @Query("zoneId") zoneId: String
+    ): Call<ResponseEntity>
+
+
+    @POST("/insertClientHeartRateRecord")
+    fun insertClientHeartRateRecord(
+        @Query("rate") rate: Float,
+        @Query("timeHeartRateTaken") timeHeartRateTaken: String,
+        @Query("phoneNumber") phoneNumber: String,
+        @Query("zoneId") zoneId: String
+    ): Call<ResponseEntity>
+
+
+    @POST("/insertClientDistanceRecord")
+    fun insertClientDistanceRecord(
+        @Query("distanceInMiles") distanceInMiles: Double,
+        @Query("beginDate") beginDate: String,
+        @Query("endDate") endDate: String,
+        @Query("phoneNumber") phoneNumber: String,
+        @Query("zoneId") zoneId: String
+    ): Call<ResponseEntity>
+
+
+    @POST("/insertClientBloodPressureRecord")
+    fun insertClientBloodPressureRecord(
+        @Query("systolic") systolic: Int,
+        @Query("diastolic") diastolic: Int,
+        @Query("timeBloodPressureTaken") timeBloodPressureTaken: String,
+//        @Query("endDate") endDate: String,
+        @Query("phoneNumber") phoneNumber: String,
+        @Query("zoneId") zoneId: String
+    ): Call<ResponseEntity>
+
 }
+
+

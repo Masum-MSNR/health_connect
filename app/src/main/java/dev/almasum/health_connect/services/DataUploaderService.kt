@@ -32,7 +32,7 @@ class DataUploaderService : LifecycleService() {
         super.onCreate()
         checker.observe(this) {
             if (it == 2) {
-                count++;
+                count++
             }
             if (count == 2) {
                 stopSelf()
@@ -43,6 +43,21 @@ class DataUploaderService : LifecycleService() {
                 checker.postValue(2)
             }
             DataUploader.uploadOxygen(applicationContext) {
+                checker.postValue(2)
+            }
+            DataUploader.updateBodyTemperature(applicationContext) {
+                checker.postValue(2)
+            }
+            DataUploader.updateRespiratoryRate(applicationContext) {
+                checker.postValue(2)
+            }
+            DataUploader.updateHeartRate(applicationContext) {
+                checker.postValue(2)
+            }
+            DataUploader.updateDistanceRecord(applicationContext) {
+                checker.postValue(2)
+            }
+            DataUploader.updateBloodPressure(applicationContext) {
                 checker.postValue(2)
             }
         }
