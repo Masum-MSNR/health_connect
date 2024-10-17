@@ -90,7 +90,7 @@ interface WebService {
     ): Call<ResponseEntity>
 
 
-    @POST("/insertClientRespiratoryRateRecord")
+    @POST("/insertClientRespiratoryeRecord")
     fun insertClientRespiratoryRateRecord(
         @Query("rate") rate: Float,
         @Query("timeRespiratoryRateTaken") timeRespiratoryRateTaken: String,

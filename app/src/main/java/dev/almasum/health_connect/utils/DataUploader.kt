@@ -201,6 +201,10 @@ object DataUploader {
                 Locale.getDefault()
             ).format(System.currentTimeMillis())
 
+            Log.v("rate", rate.toString())
+            Log.v("time", currentTime)
+            Log.v("phone", Prefs.phone)
+
             val call = WebService.getClient().insertClientRespiratoryRateRecord(
                 rate = rate,
                 timeRespiratoryRateTaken = currentTime,
